@@ -3,7 +3,7 @@
 #include <thread>
 #include <chrono>
 #include <mutex>
-
+#if 0
 struct Base
 {
 	Base() { std::cout << "  Base::Base()\n"; }
@@ -30,7 +30,7 @@ void thr(std::shared_ptr<Base> p)
 	}
 }
 
-int main()
+int configure_main()
 {
 	std::shared_ptr<Base> p = std::make_shared<Derived>();
 
@@ -48,3 +48,4 @@ int main()
 	t3.join();
 	std::cout << "All threads completed, the last one deleted Derived\n";
 }
+#endif
