@@ -10,41 +10,85 @@ using std::vector;
 using std::string;
 using std::iterator;
 
-
-int main ()
+class CUnit
 {
-    string str[] = {"robert", "snow", "blan", "arya", "sansa"};
-    vector<string*> myList;
-    string *pStr1 = new string("Robb");
-    myList.push_back(pStr1);
-    string *pStr2 = new string("Snow");
-    myList.push_back(pStr2);
-    string *pStr3 = new string("Bran");
-    myList.push_back(pStr3);
-    string *pStr4 = new string("Arya");
-    myList.push_back(pStr4);
-    string *pStr5 = new string("Sansa");
-    myList.push_back(pStr5);
+  private:
+    /* data */
+    string m_name;
 
-    for (vector<string*>::iterator it = myList.begin(); it != myList.end(); it++)
+  public:
+    CUnit(string name)
     {
-        cout<<"-----"<<**it<<endl;
-        //myList.erase(it++);
+        m_name = name;
+        //cout<<this<<",create"<<endl;
     }
-    /*
-    myList.clear();
-    vector<string*>().swap(myList);
-    */
-
-    for (vector<string *>::iterator it = myList.begin(); it != myList.end(); )
+    ~CUnit()
     {
-        myList.erase(it++);
+        //delete member
+        cout << this << ",destroy" << endl;
     }
+    CUnit(const CUnit &c)
+    {
+        //cout<<&c<<",param"<<endl;
+        //cout<<this<<",copy"<<endl;
+    }
+    string getName()
+    {
+        cout << this << ",copy" << endl;
+        return m_name;
+    }
+};
 
-    cout << myList.size() << endl;
-    cout << myList.capacity() << endl;
+int main()
+{
+    list<CUnit *> listStr;
+    CUnit *cUnit1 = new CUnit("Robb");
+    listStr.push_back(cUnit1); //此处调用复制构造函数
 
-    cout<<pStr4<<endl;
+    cout << "push one" << endl;
+    cout << "listStr.size()    :" << listStr.size() << endl;
+
+    CUnit *cUnit2 = new CUnit("Bran"); //size不够，多次复制构造
+    listStr.push_back(cUnit2);
+
+    cout << "push two" << endl;
+    cout << "listStr.size()    :" << listStr.size() << endl;
+    CUnit *cUnit3 = new CUnit("Snow"); //size不够，多次复制构造
+    listStr.push_back(cUnit3);
+    CUnit *cUnit4 = new CUnit("Arya"); //size不够，多次复制构造
+    listStr.push_back(cUnit4);
+    CUnit *cUnit5 = new CUnit("Sansa"); //size不够，多次复制构造
+    listStr.push_back(cUnit5);
+
+    cout << "push five" << endl;
+    cout << "listStr.size()    :" << listStr.size() << endl;
+    cout << endl;
+
+    /*打印*/
+    for (list<CUnit *>::iterator it = listStr.begin(); it != listStr.end(); it++)
+    {
+        cout << "-----" << (*it)->getName() << "-----" << endl;
+    }
+    /*释放前list的容量*/
+    cout << "释放前list的容量" << endl;
+    cout << "listStr.size()    :" << listStr.size() << endl;
+    cout << "~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+   
+    //调用析构函数，清掉了list的内存
+    for (list<CUnit *>::iterator it = listStr.begin(); it != listStr.end();)
+    {
+        delete *it;
+        listStr.erase(it);
+        //listStr.remove(*it++);
+    }
+    listStr.clear();
+
+
+    //listStr.remove(cUnit2);
+
+    cout << "释放后list的容量" << endl;
+    cout << "listStr.size()    :" << listStr.size() << endl;
+    cout << "~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
 
     system("pause");
     return 0;

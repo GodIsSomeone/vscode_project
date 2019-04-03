@@ -20,6 +20,9 @@ int main()
         autoMars->prin();
         Mars *mars = new Mars;
         std::unique_ptr<Mars> pMars(mars);
+        std::unique_ptr<Mars> pMars2(mars);
+        std::cout << "pMars2->prin:          ";
+        pMars2->prin();
         std::cout << "pMars->prin:          ";
         pMars->prin();
         std::cout << "pMars.get()->prin:    ";
@@ -31,7 +34,7 @@ int main()
         pMars.reset(new Mars);
         std::cout << "pMars.reset.prin:      ";
         pMars->prin();
-
+#if 0
         std::unique_ptr<Mars> pMars2;
         pMars2 = std::move(pMars);
         std::cout << "pMars2.move.prin:      ";
@@ -39,6 +42,7 @@ int main()
         pMars2->prin();
         pMars2.get_deleter();
         std::cout << "pMars2.getdelete:" << pMars2.get() << std::endl;
+#endif
     }
 
     system("pause");
