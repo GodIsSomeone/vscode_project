@@ -79,12 +79,53 @@ void QuickSort(int arr[], int size)
     printArray(arr, size);
 }
 
+void SelectSort(int arr[], int size)
+{
+    checkParam(arr, size);
+
+    for(int i=0; i<size; i++)
+    {
+        int min = i;
+        for(int j= i+1;j<size;j++)
+        {
+            if(arr[j]<arr[min])
+            {
+                min = j;
+            }
+        }
+
+        swapElement(arr[min], arr[i]);
+    }
+
+    printArray(arr, size);
+}
+
+void InsertSort(int arr[], int size)
+{
+    checkParam(arr, size);
+
+    for (int i = 1; i < size; i++)
+    {
+        int cur = arr[i];
+        int j=i-1;
+
+        for ( ; j>=0 && arr[j] > cur; j--)
+        {
+            arr[j+1] =arr[j]; 
+        }
+        arr[j+1]=cur;
+    }
+
+    printArray(arr, size);
+}
 
 int main()
 {
     int arr[10] = {23, 12, 31, 45, 32, 1, 4, 13, 45, 90};
     //BubbleSort(arr,0);
-    QuickSort(arr,10);
+    //QuickSort(arr,10);
+    //SelectSort(arr,10);
+    InsertSort(arr,10);
     system("pause");
     return 0;
 }
