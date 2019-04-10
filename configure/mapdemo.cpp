@@ -2,7 +2,6 @@
 
 int main()
 {
-    
     cout<<endl<<"map:"<<endl;
     map<char, int> mymap;
     // insert some values:
@@ -14,7 +13,7 @@ int main()
     mymap['f'] = 60;
     for (map<char, int>::iterator it = mymap.begin(); it != mymap.end();)
     {
-        #if 1
+        #if 0
         if (it->second == 10)
         {
             //For the key - based version(2), the function returns the number of elements erased.
@@ -25,13 +24,16 @@ int main()
             it++;
         }
         #endif
-        //mymap.erase(it++);
+        cout << "before erase:" << it->second << endl;
+        it = mymap.erase(it);
+        cout << "after erase:" << it->second << endl;
     }
     for (map<char, int>::iterator it = mymap.begin(); it != mymap.end();it++)
     {
         cout << it->second << " , ";
     }
 
+#if 0
     cout<<endl<<"vector:"<<endl;
 
     vector<int> myvector;
@@ -41,7 +43,7 @@ int main()
         myvector.push_back(i);
     for (vector<int>::iterator it = myvector.begin(); it != myvector.end();)
     {
-        #if 0
+#if 0
         if (*it == 5)
         {
             myvector.erase(it++);
@@ -51,8 +53,11 @@ int main()
         {
             it++;
         }
-        #endif
+#endif
+
+        cout << "before erase:" << *it << endl;
         myvector.erase(it);
+        cout << "after erase:" << *it << endl;
     }
 
     // set some values (from 1 to 10)
@@ -61,15 +66,18 @@ int main()
         cout << myvector[i] << " , ";
     }
 
+#endif
+#if 0
     cout<<endl<<"list:"<<endl;
     list<int> mylist;
 
     // set some values:
     for (int i = 1; i < 10; ++i)
         mylist.push_back(i * 10);
-    for (list<int>::iterator it = mylist.begin(); it != mylist.end();)
+
+    for (list<int>::iterator it = mylist.begin(); it != mylist.end(); )
     {
-        #if 1
+        #if 0
         if (*it == 50)
         {
             mylist.erase(it++);
@@ -81,7 +89,10 @@ int main()
             it++;
         }
         #endif
-        //mylist.erase(it++);
+        cout << "before erase:" << *it << endl;
+
+        it = mylist.erase(it);
+        cout << "after erase:" << *it << endl;
     }
 
     // set some values (from 1 to 10)
@@ -89,7 +100,7 @@ int main()
     {
         cout << *it << " , ";
     }
-
+#endif
     system("pause");
     return 0;
 }
