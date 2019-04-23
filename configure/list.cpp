@@ -41,6 +41,7 @@ class CUnit
 
 int main()
 {
+#if 0
     list<CUnit *> listStr;
     CUnit *cUnit1 = new CUnit("Robb");
     listStr.push_back(cUnit1); //此处调用复制构造函数
@@ -89,7 +90,7 @@ int main()
     cout << "释放后list的容量" << endl;
     cout << "listStr.size()    :" << listStr.size() << endl;
     cout << "~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
-
+#endif
     system("pause");
     return 0;
 }

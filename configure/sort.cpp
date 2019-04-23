@@ -159,13 +159,79 @@ int BinarySearch(int arr[], int length, int value)
     return ret;
 }
 
+void shell_sort(int array[], int length)
+{
+    int h = 1;
+    while (h < length / 3)
+    {
+        h = 3 * h + 1;
+    }
+    cout<<h<<endl;
+    while (h >= 1)
+    {
+        for (int i = h; i < length; i++)
+        {
+            for (int j = i; j >= h && array[j] < array[j - h]; j -= h)
+            {
+                std::swap(array[j], array[j - h]);
+            }
+        }
+        h = h / 3;
+    }
+
+    printArray(array, length);
+}
+
+void create_heap(int array[], int begin, int end)
+{
+    int son = begin * 2 + 1;
+    int dad = begin;
+    while(son<=end)
+    {
+        if (son+1 <= end && array[son] < array[son + 1])
+        {
+            son++;
+        }
+        
+        if(array[dad] > array[son]) 
+            return;
+        else
+        {
+            std::swap(array[dad], array[son]);
+            dad = son;
+            son = dad*2+1;
+        }
+
+    }
+}
+
+void heap_sort(int array[], int length)
+{
+    //²ÎÊýÅÐ¶Ï
+    for (int i = length / 2 - 1; i >= 0; i--)
+    {
+        create_heap(array, i, length - 1);
+    }
+
+    /**/
+    for (int i = length - 1; i > 0; i--)
+    {
+        std::swap(array[0], array[i]);
+        create_heap(array, 0, i-1);
+    }
+
+    printArray(array, length);
+}
+
 
 
 int main()
 {
     int arr[10] = {23, 12, 31, 45, 32, 1, 4, 13, 45, 90};
     //BubbleSort(arr,10);
-    QuickSort(arr,10);
+    //QuickSort(arr,10);
+    heap_sort(arr,10);
+    //shell_sort(arr,10);
     //SelectSort(arr,10);
     //InsertSort(arr,10);
     system("pause");
