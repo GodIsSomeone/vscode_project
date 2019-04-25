@@ -146,8 +146,8 @@ void QuickSort(int arr[], int size)
 大顶堆：arr[i] >= arr[2i+1] && arr[i] >= arr[2i+2]  
 小顶堆：arr[i] <= arr[2i+1] && arr[i] <= arr[2i+2]  
 然后对左边的数据，和右边的数据进行处理。
-时间复杂度，在最坏情况下：O(n^2)，平均时间复杂度：O(NlogN,2为底)，平均复杂度，1.3NlogN  
-空间复杂度，在最坏情况下：O(n)，平均时间复杂度：O(logN,2为底)  
+时间复杂度：平均 O(NlogN,2为底)  
+空间复杂度：O(1)  
 */
 
 void create_heap(int array[], int begin, int end)
