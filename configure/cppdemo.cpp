@@ -1,5 +1,5 @@
 // unique_ptr::release example
-#include "Allinclude.h"
+#include "master.h"
 class Mars
 {
   public:

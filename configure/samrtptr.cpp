@@ -1,4 +1,4 @@
-#include "Allinclude.h"
+#include "master.h"
 
 class CPoint
 {

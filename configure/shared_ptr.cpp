@@ -1,4 +1,4 @@
-#include"Allinclude.h"
+#include"master.h"
 using std::make_shared;
 
 class Mars
